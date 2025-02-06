@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">🌿</a>
       <button
@@ -16,19 +16,19 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <router-link class="nav-link active" aria-current="page" to="/">Főoldal</router-link>
+            <router-link class="nav-link" to="/" exact-active-class="active">Főoldal</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/project-list">Projektek Listája</router-link>
+            <router-link class="nav-link" to="/project-list" exact-active-class="active">Projektek Listája</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/project-form">Új Projekt Hozzáadása</router-link>
+            <router-link class="nav-link" to="/project-form" exact-active-class="active">Új Projekt Hozzáadása</router-link>
           </li>
         </ul>
       </div>
     </div>
   </nav>
-  </template>
-  <script setup>
-  import '.././style.css'
-  </script>
+</template>
+
+<script setup>
+</script>

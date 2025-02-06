@@ -1,10 +1,9 @@
-<script setup>
-import Navbar from './components/Navbar.vue'
-import './style.css'
-</script>
-
 <template>
   <div>
-    <Navbar />
+    <Layout />
   </div>
 </template>
+
+<script setup>
+import Layout from './components/Layout.vue'
+</script>

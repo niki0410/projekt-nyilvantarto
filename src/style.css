@@ -10,3 +10,7 @@
 nav{
   font-family: var(--primary-font);
 }
+form{
+  max-width: 500px;
+  margin: 20px auto;
+}
