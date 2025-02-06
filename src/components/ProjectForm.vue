@@ -7,7 +7,6 @@
           placeholder="Projekt neve"
           id="project-name"
           v-model="projectName"
-          @input="validateForm"
           required
         />
       </div>
@@ -19,7 +18,6 @@
           placeholder="Leírás"
           id="project-desc"
           v-model="projectDesc"
-          @input="validateForm"
         />
       </div>
       <div class="mb-3">
@@ -29,7 +27,6 @@
           type="date"
           id="start-date"
           v-model="startDate"
-          @input="validateForm"
         />
       </div>
       <div class="mb-3">
@@ -40,10 +37,9 @@
           min="0"
           id="project-budget"
           v-model="projectBudget"
-          @input="validateForm"
         />
       </div>
-      <input type="submit" class="btn btn-primary" />
+      <input type="submit" class="btn btn-primary" value="Mentés"/>
     </form>
   </template>
   
@@ -55,13 +51,13 @@
   const startDate = ref("");
   const projectBudget = ref("");
   
-  const isValidDate = (date) => {
-    const regex = /^\d{4}-\d{2}-\d{2}$/;
-    return regex.test(date);
-  };
-  
   const validateForm = () => {
     let valid = true;
+  
+    const isValidDate = (date) => {
+      const regex = /^\d{4}-\d{2}-\d{2}$/; 
+      return regex.test(date);
+    };
   
     if (!projectName.value.trim()) {
       valid = false;
@@ -77,6 +73,24 @@
   
     if (valid) {
       console.log("Űrlap érvényes");
+  
+      const newProject = {
+        projectName: projectName.value,
+        projectDesc: projectDesc.value,
+        startDate: startDate.value,
+        projectBudget: projectBudget.value,
+      };
+  
+      const existingProjects = JSON.parse(localStorage.getItem("projects")) || [];
+      existingProjects.push(newProject);
+      localStorage.setItem("projects", JSON.stringify(existingProjects));
+  
+      projectName.value = "";
+      projectDesc.value = "";
+      startDate.value = "";
+      projectBudget.value = "";
+    } else {
+      console.log("Űrlap érvénytelen");
     }
   };
   </script>

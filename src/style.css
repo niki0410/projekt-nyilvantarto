@@ -14,3 +14,23 @@ form{
   max-width: 500px;
   margin: 20px auto;
 }
+
+.table th, .table td {
+  vertical-align: middle;
+}
+
+#editBtn{
+background-color:var(--primary-color);
+color:#fff;
+margin-right: 10px;
+}
+#deleteBtn{
+  background-color:var(--primary-color);
+  color:#fff;
+}
+#deleteBtn:hover{
+  background-color:#6f7d6e;
+}
+#editBtn:hover{
+  background-color:#6f7d6e;
+}
