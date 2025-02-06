@@ -1,0 +1,12 @@
+:root {
+  --primary-color: #acc6aa;
+  --primary-font: 'Raleway', sans-serif;
+  --secondary-font:'Comfortaa', cursive;
+}
+.nav-item:hover {
+  background-color: var(--primary-color);
+  color:#fff;
+}
+nav{
+  font-family: var(--primary-font);
+}
