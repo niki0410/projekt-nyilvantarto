@@ -1,4 +1,6 @@
 <template>
+    <div class="hero">
+
     <form @submit.prevent="validateForm">
       <div class="mb-3">
         <input
@@ -21,7 +23,7 @@
         />
       </div>
       <div class="mb-3">
-        <label for="start-date" class="form-label">Kezdési dátum: </label>
+        <label for="start-date" class="form-label" id="startDateLabel">Kezdési dátum: </label>
         <input
           class="form-control"
           type="date"
@@ -39,8 +41,9 @@
           v-model="projectBudget"
         />
       </div>
-      <input type="submit" class="btn btn-primary" value="Mentés"/>
+      <input type="submit" id="saveBtn" class="btn btn-primary" value="Mentés"/>
     </form>
+    </div>
   </template>
   
   <script setup>

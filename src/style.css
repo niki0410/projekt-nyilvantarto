@@ -1,21 +1,28 @@
 :root {
   --primary-color: #acc6aa;
-  --primary-font: 'Raleway', sans-serif;
-  --secondary-font:'Comfortaa', cursive;
+  --secondary-color: #e4e6e4;
+  --button-color: #6f7d6e;
+  --primary-font: "Raleway", sans-serif;
+  --secondary-font: "Comfortaa", cursive;
 }
 .nav-item:hover {
   background-color: var(--primary-color);
-  color:#fff;
+  color: #fff;
 }
-nav{
+.nav-item {
+  transition: all 300ms ease-in-out;
+}
+
+nav {
   font-family: var(--primary-font);
 }
-form{
+form {
   max-width: 500px;
   margin: 20px auto;
 }
 
-.table th, .table td {
+.table th,
+.table td {
   vertical-align: middle;
   font-family: var(--secondary-font);
 }
@@ -23,25 +30,81 @@ form{
   font-family: var(--primary-font);
 }
 
-h1{
+h1 {
   font-family: var(--primary-font);
   font-weight: 600;
-  padding:20px;
+  padding: 20px;
   text-align: center;
 }
 
-#editBtn{
-background-color:var(--primary-color);
-color:#fff;
-margin-right: 10px;
+#editBtn {
+  transition: all 300ms ease-in-out;
+  background-color: var(--button-color);
+  color: #fff;
+  margin-right: 10px;
 }
-#deleteBtn{
-  background-color:var(--primary-color);
-  color:#fff;
+#deleteBtn {
+  transition: all 300ms ease-in-out;
+  background-color: var(--button-color);
+  color: #fff;
 }
-#deleteBtn:hover{
-  background-color:#6f7d6e;
+#deleteBtn:hover {
+  background-color: #fff;
+  color:#4e4e4e;
 }
-#editBtn:hover{
-  background-color:#6f7d6e;
+#editBtn:hover {
+  background-color: #fff;
+  color:#4e4e4e;
+}
+#saveBtn{
+  transition: all 300ms ease-in-out;
+  background-color: var(--button-color);
+  border:none;
+}
+#saveBtn:hover{
+  background-color: #fff;
+  color:#4e4e4e;
+}
+#startDateLabel {
+  text-align: left;
+  display: block; 
+}
+.hero-list{
+  background-color: var(--secondary-color);
+  text-align: center;
+  padding: 80px 20px;
+}
+.hero {
+  background-color: var(--secondary-color);
+  text-align: center;
+  padding: 80px 20px;
+}
+.hero h1 {
+  font-family: var(--primary-font);
+  font-weight: bold;
+  font-size: 62px;
+  line-height: 1.4;
+}
+
+.hero .container {
+  width: 400px;
+  margin: 0px auto;
+}
+
+.hero .col {
+  background-color: #fff;
+  border-radius: 5px;
+  margin: 20px;
+  padding: 20px 30px;
+  transition: all 300ms ease-in-out;
+}
+
+.hero .col:hover {
+  background-color: var(--button-color);
+  color: #fff;
+  cursor: pointer;
+}
+
+.icon {
+  font-size: 50px;
 }

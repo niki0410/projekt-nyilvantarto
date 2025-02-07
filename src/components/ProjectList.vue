@@ -1,4 +1,5 @@
 <template>
+    <div class="hero-list">
   <div class="container mt-4">
     <div v-if="projects.length !== 0">
       <table class="table table-striped">
@@ -39,6 +40,8 @@
     </div>
     <div v-else>Nincs adat</div>
   </div>
+</div>
+
 </template>
 
 <script setup>
