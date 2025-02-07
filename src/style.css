@@ -28,15 +28,31 @@ form {
 }
 .table td {
   font-family: var(--primary-font);
+  height: 54.5px;
+  min-width: 160px;
 }
+.hero-list .form-control {
+  display: inline-block; 
+  text-align: center;
+  max-width: 140px;
 
+}
 h1 {
   font-family: var(--primary-font);
   font-weight: 600;
   padding: 20px;
   text-align: center;
 }
-
+#saveBtn2{
+  transition: all 300ms ease-in-out;
+  background-color: var(--button-color);
+  color: #fff;
+  margin-right: 10px;
+}
+#saveBtn2:hover{
+  background-color: #fff;
+  color:#4e4e4e;
+}
 #editBtn {
   transition: all 300ms ease-in-out;
   background-color: var(--button-color);
