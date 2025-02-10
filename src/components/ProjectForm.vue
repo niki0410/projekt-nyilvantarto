@@ -1,6 +1,6 @@
 <template>
     <div class="hero">
-
+    <h2>Új projekt hozzáadása</h2>
     <form @submit.prevent="validateForm">
       <div class="mb-3">
         <input
