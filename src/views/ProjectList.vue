@@ -8,7 +8,7 @@
             class="form-control search-input"
             placeholder="Név szerinti keresés..."
             id="searchInput"
-            @keyup="search"
+            @input="search"
           />
           <span class="input-group-text"><i class="bi bi-search"></i></span>
         </div>
@@ -26,7 +26,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(project, index) in projects" :key="index">
+              <tr v-for="(project, index) in filteredProjects" :key="index">
                 <td v-if="!editShow[index]">{{ project.projectName }}</td>
                 <td v-else>
                   <input v-model="project.projectName" class="form-control" />
@@ -94,11 +94,13 @@ import { ref, onMounted, watch } from "vue";
 const projects = ref([]);
 const editShow = ref([]);
 const formattedDates = ref([]);
+const filteredProjects = ref([]);
 
 onMounted(() => {
   const storedProjects = localStorage.getItem("projects");
   if (storedProjects) {
     projects.value = JSON.parse(storedProjects);
+    filteredProjects.value = [...projects.value];
     editShow.value = Array(projects.value.length).fill(false);
     updateFormattedDates();
   }
@@ -140,6 +142,7 @@ const toggleEditShow = (index) => {
 const saveProject = (index) => {
   editShow.value[index] = false;
   localStorage.setItem("projects", JSON.stringify(projects.value));
+  filteredProjects.value = [...projects.value];
   console.log("Mentve:", projects.value[index]);
 };
 
@@ -147,25 +150,13 @@ const deleteProject = (index) => {
   projects.value.splice(index, 1);
   editShow.value.splice(index, 1);
   localStorage.setItem("projects", JSON.stringify(projects.value));
+  filteredProjects.value = [...projects.value];
 };
 
-function search() {
-  let input, filter, table, tr, td, i, txtValue;
-  input = document.getElementById("searchInput");
-  filter = input.value.toUpperCase();
-  table = document.getElementById("listTable");
-  tr = table.getElementsByTagName("tr");
-
-  for (i = 1; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[0];
-    if (td) {
-      txtValue = td.textContent || td.innerText;
-      if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
-    }
-  }
+function search(event) {
+  const searchTerm = event.target.value.toLowerCase();
+  filteredProjects.value = projects.value.filter((project) =>
+    project.projectName.toLowerCase().includes(searchTerm)
+  );
 }
 </script>
