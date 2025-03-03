@@ -14,73 +14,17 @@
         </div>
       </div>
       <div class="table-container">
-        <div v-if="projects.length !== 0">
-          <table class="table table-striped" id="listTable">
-            <thead>
-              <tr>
-                <th scope="col">Projekt neve</th>
-                <th scope="col">Leírás</th>
-                <th scope="col">Kezdési dátum</th>
-                <th scope="col">Költségvetés</th>
-                <th scope="col">Műveletek</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="(project, index) in filteredProjects" :key="index">
-                <td v-if="!editShow[index]">{{ project.projectName }}</td>
-                <td v-else>
-                  <input v-model="project.projectName" class="form-control" />
-                </td>
-                <td v-if="!editShow[index]">{{ project.projectDesc }}</td>
-                <td v-else>
-                  <input v-model="project.projectDesc" class="form-control" />
-                </td>
-                <td v-if="!editShow[index]">{{ formattedDates[index] }}</td>
-                <td v-else>
-                  <input
-                    v-model="project.startDate"
-                    class="form-control"
-                    type="date"
-                  />
-                </td>
-                <td v-if="!editShow[index]">
-                  {{ formatBudget(project.projectBudget) }}
-                </td>
-                <td v-else>
-                  <input
-                    v-model="project.projectBudget"
-                    class="form-control"
-                    type="number"
-                  />
-                </td>
-                <td>
-                  <button
-                    id="editBtn"
-                    class="btn btn-sm"
-                    v-if="!editShow[index]"
-                    @click="toggleEditShow(index)"
-                  >
-                    <i class="bi bi-pencil-square"></i>
-                  </button>
-                  <button
-                    id="saveBtn2"
-                    class="btn btn-sm"
-                    v-else
-                    @click="saveProject(index)"
-                  >
-                    <i class="bi bi-floppy"></i>
-                  </button>
-                  <button
-                    id="deleteBtn"
-                    class="btn btn-sm"
-                    @click="deleteProject(index)"
-                  >
-                    <i class="bi bi-trash"></i>
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+        <div v-if="filteredProjects && filteredProjects.length">
+          <Table
+            :headers="tableColumnLabels"
+            :rows="filteredProjects"
+            :edit-show="editShow"
+            :format-date="formatDate"
+            :format-budget="formatBudget"
+            @edit-row="editRow"
+            @save-row="saveRow"
+            @delete-row="deleteProject"
+          />
         </div>
         <div v-else>Nincs adat</div>
       </div>
@@ -90,11 +34,19 @@
 
 <script setup>
 import { ref, onMounted, watch } from "vue";
+import Table from "../components/Table.vue";
 
 const projects = ref([]);
 const editShow = ref([]);
 const formattedDates = ref([]);
 const filteredProjects = ref([]);
+const tableColumnLabels = ref([
+  "Projekt neve",
+  "Leírás",
+  "Kezdési dátum",
+  "Költségvetés",
+  "Műveletek",
+]);
 
 onMounted(() => {
   const storedProjects = localStorage.getItem("projects");
@@ -135,15 +87,15 @@ const formatBudget = (budget) => {
   }).format(budget);
 };
 
-const toggleEditShow = (index) => {
-  editShow.value[index] = !editShow.value[index];
+const editRow = (index) => {
+  editShow.value[index] = true;
 };
 
-const saveProject = (index) => {
+const saveRow = (index, updatedRow) => {
   editShow.value[index] = false;
+  projects.value[index] = updatedRow;
   localStorage.setItem("projects", JSON.stringify(projects.value));
   filteredProjects.value = [...projects.value];
-  console.log("Mentve:", projects.value[index]);
 };
 
 const deleteProject = (index) => {
